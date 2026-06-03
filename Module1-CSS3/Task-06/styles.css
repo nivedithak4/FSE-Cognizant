@@ -1,0 +1,62 @@
+/* General Page Styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+/* Link Pseudo Classes */
+
+/* Unvisited Link */
+a:link {
+    color: blue;
+    text-decoration: none;
+}
+
+/* Visited Link */
+a:visited {
+    color: purple;
+}
+
+/* Mouse Hover */
+a:hover {
+    color: red;
+    text-decoration: underline;
+}
+
+/* Active Link */
+a:active {
+    color: green;
+}
+
+/* Navigation Menu */
+.nav-menu {
+    list-style-type: none; /* Removes bullets */
+    padding: 0;
+    margin: 0;
+}
+
+.nav-menu li {
+    display: inline-block;
+    padding: 10px 15px;
+    margin-right: 10px;
+    background-color: #f0f0f0;
+}
+
+/* Ordered List */
+.ordered-list {
+    list-style-type: upper-roman;
+    list-style-position: inside;
+}
+
+/* Unordered List */
+.unordered-list {
+    list-style-type: square;
+    list-style-position: outside;
+}
+
+/* Spacing for List Items */
+.ordered-list li,
+.unordered-list li {
+    padding: 5px;
+    margin: 5px 0;
+}

@@ -1,0 +1,107 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    width: 100%;
+}
+
+header {
+    background-color: steelblue;
+    color: white;
+    text-align: center;
+    padding: 2vh;
+}
+
+/* Navigation */
+.navbar {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    background-color: #333;
+}
+
+.navbar li {
+    padding: 2vh 2vw;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+}
+
+/* Responsive Layout using Flexbox */
+.container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: 90%;
+    margin: 3vh auto;
+}
+
+.card {
+    width: 30%;
+    border: 1px solid gray;
+    padding: 2vh;
+    margin: 1vh;
+    text-align: center;
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+}
+
+h1 {
+    font-size: 3vw;
+}
+
+h2 {
+    font-size: 2vw;
+    margin: 1vh 0;
+}
+
+p {
+    font-size: 1.2vw;
+}
+
+/* Media Query for screens smaller than 768px */
+@media screen and (max-width: 768px) {
+
+    /* Stack navigation vertically */
+    .navbar {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Cards stack vertically */
+    .container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card {
+        width: 90%;
+    }
+
+    /* Reduce font sizes */
+    h1 {
+        font-size: 6vw;
+    }
+
+    h2 {
+        font-size: 5vw;
+    }
+
+    p {
+        font-size: 4vw;
+    }
+
+    /* Reduce image size */
+    .card img {
+        width: 80%;
+    }
+}
