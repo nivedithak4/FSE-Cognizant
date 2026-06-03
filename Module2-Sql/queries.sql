@@ -92,3 +92,80 @@ FROM feedback f
 JOIN events e
 ON f.event_id = e.event_id
 GROUP BY e.city;
+
+#14
+SELECT event_id, COUNT(*) AS total_registrations 
+FROM Registrations 
+GROUP BY event_id 
+ORDER BY total_registrations DESC 
+LIMIT 3;
+
+#15
+SELECT s1.session_id AS session_1, s2.session_id AS session_2, s1.event_id 
+FROM Sessions s1 
+JOIN Sessions s2 ON s1.event_id=s2.event_id AND s1.session_id<s2.session_id 
+WHERE s1.start_time<s2.end_time AND s1.end_time>s2.start_time;
+
+#16
+SELECT * FROM Users 
+WHERE registration_date>=DATE_SUB(CURDATE(), INTERVAL 30 DAY) 
+AND user_id NOT IN (SELECT user_id FROM Registrations);
+
+#17
+SELECT speaker_name 
+FROM Sessions 
+GROUP BY speaker_name 
+HAVING COUNT(session_id)>1;
+
+#18
+SELECT e.event_id, e.title 
+FROM Events e 
+LEFT JOIN Resources r ON e.event_id=r.event_id 
+WHERE r.resource_id IS NULL;
+
+#19
+SELECT e.event_id, e.title, COUNT(DISTINCT r.registration_id) AS total_registrations, AVG(f.rating) AS avg_rating 
+FROM Events e 
+LEFT JOIN Registrations r ON e.event_id=r.event_id 
+LEFT JOIN Feedback f ON e.event_id=f.event_id 
+WHERE e.status='completed' 
+GROUP BY e.event_id, e.title;
+
+#20
+SELECT u.user_id, u.full_name, COUNT(DISTINCT r.registration_id) AS events_attended, COUNT(DISTINCT f.feedback_id) AS feedback_submitted 
+FROM Users u 
+LEFT JOIN Registrations r ON u.user_id=r.user_id 
+LEFT JOIN Feedback f ON u.user_id=f.user_id 
+GROUP BY u.user_id, u.full_name;
+
+#21
+SELECT user_id, COUNT(feedback_id) AS feedback_count 
+FROM Feedback 
+GROUP BY user_id 
+ORDER BY feedback_count DESC 
+LIMIT 5;
+
+#22
+SELECT user_id, event_id, COUNT(*) AS registration_count 
+FROM Registrations 
+GROUP BY user_id, event_id 
+HAVING COUNT(*)>1;
+
+#23
+SELECT DATE_FORMAT(registration_date, '%Y-%m') AS registration_month, COUNT(*) AS total_registrations 
+FROM Registrations 
+WHERE registration_date>=DATE_SUB(CURDATE(), INTERVAL 12 MONTH) 
+GROUP BY registration_month 
+ORDER BY registration_month;
+
+#24
+SELECT event_id, AVG(TIMESTAMPDIFF(MINUTE, start_time, end_time)) AS avg_duration_minutes 
+FROM Sessions 
+GROUP BY event_id;
+
+#25
+SELECT e.event_id, e.title 
+FROM Events e 
+LEFT JOIN Sessions s ON e.event_id=s.event_id 
+WHERE s.session_id IS NULL;
+
